@@ -8,12 +8,12 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: process.env.NODE_ENV === 'development' ? '/' : '/vue/',
       name: 'main',
       component: Main
     },
     {
-      path: '/archives',
+      path: process.env.NODE_ENV === 'development' ? '/archives' : '/vue/',
       name: 'archives',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route

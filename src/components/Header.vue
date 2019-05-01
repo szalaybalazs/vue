@@ -1,13 +1,19 @@
 <template>
   <div class="wrapper">
-    <router-link to="/"><h1>Todos</h1></router-link>
-    <router-link class='button' to="/archives">Archives</router-link>
+    <router-link v-bind:to='home'><h1>Todos</h1></router-link>
+    <router-link v-bind:to='archives' class='button'>Archives</router-link>
   </div>
 </template>
 
 <script>
 export default {
-  
+  name: 'header',
+  data() {
+    return {
+      home: process.env.NODE_ENV === 'development' ? '/' : '/vue/',
+      archives: process.env.NODE_ENV === 'development' ? '/archives' : '/vue/archives'
+    }
+  }
 }
 </script>
 
