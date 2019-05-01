@@ -7,12 +7,12 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: process.env.NODE_ENV === 'development' ? '/' : '/vue/',
+      path: '/',
       name: 'main',
       component: Main
     },
     {
-      path: process.env.NODE_ENV === 'development' ? '/archives' : '/vue/archives',
+      path: '/archives',
       name: 'archives',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
