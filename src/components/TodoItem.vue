@@ -2,7 +2,7 @@
   <div 
     class="wrapper" 
     v-bind:class="{'completed':todo.completed}" :style="{...getColors.todoItem}">
-    <span v-on:click="toggleComplete">{{capitalizedTitle}}</span>
+    <span v-on:click="toggleComplete">{{todo.title | capitalize}}</span>
     <button @click="$emit('deleteTodo', todo.id)">
       <img alt="Vue logo" src="../assets/bin.png">
     </button>
@@ -25,12 +25,15 @@ export default {
       shown: true
     }
   },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      value = value.toString()
+      return value.charAt(0).toUpperCase() + value.slice(1)
+    }
+  },
   computed: {
     ...mapGetters(['getColors']),
-    capitalizedTitle() {
-      let title = this.todo.title.charAt(0).toUpperCase() + this.todo.title.slice(1)
-      return title;
-    }
   }
 }
 </script>

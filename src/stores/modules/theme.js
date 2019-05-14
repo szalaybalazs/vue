@@ -7,6 +7,9 @@ const state = {
     themePopup: {
       backgroundColor: '#2F3335'
     },
+    body: {
+      backgroundColor: '#e0e7ee'
+    }
   },
   darkThemeColors: {
     header: {
@@ -50,12 +53,29 @@ const getters = {
 const actions = {
   toggleTheme: ({ commit }) => commit('toggleTheme'),
   setTheme: ({ commit, state }, theme) => state.selectedTheme !== theme && commit('toggleTheme'),
-};  
+  updateBackground: ({ commit }, rgba) => commit('updateBackground', rgba),
+  setBackground: ({ commit }, light, dark) => commit('setBackground', light, dark)
+}; 
 
 const mutations = {
   toggleTheme: (state) => {
     state.selectedTheme = state.selectedTheme === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', state.selectedTheme);
+  },
+  updateBackground: (state, {r, g, b, a}) => {
+    const color = `rgba(${r}, ${g}, ${b}, ${a})`;
+
+    if (state.selectedTheme === 'light') {
+      state.lightThemeColors.body.backgroundColor = color;
+      return localStorage.setItem('light-background', color);
+    }
+    state.darkThemeColors.body.backgroundColor = color;
+    return localStorage.setItem('dark-background', color);
+
+  },
+  setBackground: (state, { light, dark }) => {
+    if (light) state.lightThemeColors.body.backgroundColor = light;
+    if (dark) state.darkThemeColors.body.backgroundColor = dark;
   }
 };
 

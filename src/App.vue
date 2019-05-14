@@ -15,14 +15,18 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'app',
   computed: mapGetters(['getColors']),
-  methods: mapActions(['setTheme']),
+  methods: mapActions([ 'setTheme', 'setBackground' ]),
   components: {
     Header,
     ThemeIcon
   },
   created() {
     const theme = localStorage.getItem('theme');
+    const light = localStorage.getItem('light-background');
+    const dark = localStorage.getItem('dark-background');
+    console.log(theme, light, dark)
     this.setTheme(theme || 'light')
+    this.setBackground({light, dark})
   }
 }
 </script>
