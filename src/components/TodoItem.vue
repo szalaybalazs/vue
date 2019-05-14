@@ -1,7 +1,7 @@
 <template>
   <div 
     class="wrapper" 
-    v-bind:class="{'completed':todo.completed}">
+    v-bind:class="{'completed':todo.completed}" :style="{...getColors.todoItem}">
     <span v-on:click="toggleComplete">{{capitalizedTitle}}</span>
     <button @click="$emit('deleteTodo', todo.id)">
       <img alt="Vue logo" src="../assets/bin.png">
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'TodoItem',
   props: ['todo'],
@@ -25,6 +26,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['getColors']),
     capitalizedTitle() {
       let title = this.todo.title.charAt(0).toUpperCase() + this.todo.title.slice(1)
       return title;

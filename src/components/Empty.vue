@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-fade">
-    <div class="wrapper" v-if='shown'>
+    <div class="wrapper" v-if='shown' :style="{...getColors.empty}">
       <h3>{{content}}</h3>
       <h2>{{title}}</h2>
     </div>
@@ -9,8 +9,10 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'Empty',
+  computed: mapGetters([ 'getColors' ]),
   props: ['shown', 'title', 'content']
 }
 </script>

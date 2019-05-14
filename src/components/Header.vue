@@ -1,20 +1,24 @@
 <template>
-  <div class="wrapper">
+  <div :style="{...getColors.header}" class="wrapper">
     <router-link to='/'><h1>Todos</h1></router-link>
     <router-link to='/archives' class='button'>Archives</router-link>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'header',
+  computed:  mapGetters([ 'getColors' ]),
+  created() {
+  }
 }
 </script>
 
 <style lang="sass" scoped>
 div.wrapper
   height: 64px
-  background-color: lighten(#34495e, 55%)
+  // background-color: lighten(#34495e, 55%)
   margin-bottom: 32px
   display: flex
   justify-content: space-between

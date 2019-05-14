@@ -1,6 +1,7 @@
 <template>
-  <div class="wrapper">
+  <div class="bodyWrapper" :style="{...getColors.body}">
     <Header />
+    <ThemeIcon />
     <transition name="fade">
       <router-view/>
     </transition>
@@ -9,16 +10,27 @@
 
 <script>
 import Header from './components/Header'
+import ThemeIcon from './components/ThemeIcon'
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'app',
+  computed: mapGetters(['getColors']),
+  methods: mapActions(['setTheme']),
   components: {
-    Header
+    Header,
+    ThemeIcon
+  },
+  created() {
+    const theme = localStorage.getItem('theme');
+    this.setTheme(theme || 'light')
   }
 }
 </script>
 
 
 <style lang='sass'>
+.bodyWrapper
+  min-height: 100vh
 html, body
   margin: 0
   padding: 0
