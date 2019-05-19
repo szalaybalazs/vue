@@ -54,7 +54,8 @@ const actions = {
   toggleTheme: ({ commit }) => commit('toggleTheme'),
   setTheme: ({ commit, state }, theme) => state.selectedTheme !== theme && commit('toggleTheme'),
   updateBackground: ({ commit }, rgba) => commit('updateBackground', rgba),
-  setBackground: ({ commit }, light, dark) => commit('setBackground', light, dark)
+  setBackground: ({ commit }, light, dark) => commit('setBackground', light, dark),
+  setModal: () => {}
 }; 
 
 const mutations = {

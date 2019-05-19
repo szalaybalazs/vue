@@ -1,5 +1,8 @@
 <template>
   <div class="bodyWrapper" :style="{...getColors.body}">
+    <portal-target name="modal">
+      <Login v-if="login" v-on:login="handleLogin" />
+    </portal-target>
     <Header />
     <ThemeIcon />
     <transition name="fade">
@@ -11,22 +14,34 @@
 <script>
 import Header from './components/Header'
 import ThemeIcon from './components/ThemeIcon'
+import Login from './components/Login'
 import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'app',
   computed: mapGetters(['getColors']),
-  methods: mapActions([ 'setTheme', 'setBackground' ]),
+  methods: {
+    ...mapActions([ 'setTheme', 'setBackground', 'setModal' ]),
+    handleLogin: function () {
+      this.login = false;
+      location.reload();
+    }
+  },
   components: {
     Header,
-    ThemeIcon
+    ThemeIcon,
+    Login
   },
   created() {
     const theme = localStorage.getItem('theme');
     const light = localStorage.getItem('light-background');
     const dark = localStorage.getItem('dark-background');
-    console.log(theme, light, dark)
+    const user = localStorage.getItem('user');
+    if (!user) this.login = true;
     this.setTheme(theme || 'light')
     this.setBackground({light, dark})
+  },
+  data: {
+    login: false
   }
 }
 </script>
